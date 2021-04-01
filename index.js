@@ -142,6 +142,8 @@ app.get('/movie/read/:action', (req, res) => {
       }
     });
 
+
+
   const movies = [
     { title: 'Jaws', year: 1975, rating: 8 },
     { title: 'Avatar', year: 2009, rating: 7.8 },
