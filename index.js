@@ -157,7 +157,41 @@ app.get('/movie/read/:action', (req, res) => {
           res.status(200).send(allMovies);
         }
       });
-
+      app.put('/movies/:id', (req, res) => {
+        const selectId = (req.params.id) - 1;
+        const newTitle = req.body.title;
+        const newRating = req.body.rating;
+       
+  
+        if (!movies[selectId]) {
+          res.status(404).send({
+            error: true,
+            message: "the movie " + (selectId + 1) + ' does not exist '
+          });
+        } else if ((newTitle == "" || newTitle == undefined) && (newRating == "" || newRating == undefined)) {
+          res.status(200).send({
+            data: movies
+          });
+        } else if (newTitle == "" || newTitle == undefined) {
+          movies[selectId].rating = newRating;
+          res.status(200).send({
+            data: movies
+          });
+        } else if (newRating == "" || newRating == undefined) {
+          movies[selectId].title = newTitle;
+          res.status(200).send({
+            data: movies
+          });
+        } else {
+          movies[selectId].title = newTitle;
+          movies[selectId].rating = newRating;
+          res.status(200).send({
+            data: movies
+          });
+        }
+      });
+  
+  
   const movies = [
     { title: 'Jaws', year: 1975, rating: 8 },
     { title: 'Avatar', year: 2009, rating: 7.8 },
