@@ -110,6 +110,38 @@ app.get('/movie/read/:action', (req, res) => {
       res.status(200).send(movies[id]);
     }
   });
+
+
+  app.post('/movies', (req, res) => {
+    const newTitle = req.body.title;
+    const newYear = parseInt(req.body.year);
+    const newRating = req.body.rating;
+
+    
+      if (newTitle == "" || newTitle == undefined || //missing title
+        newYear == "" || newYear == undefined || //missing year
+        newYear < 1000 || newYear > 9999 || (!newYear)) //unacceptable year value
+      {
+        res.status(403).json({message: "You cannot create a movie without providing s title and a year"});
+        return;
+      } else if (newRating == "" || newRating == undefined) {
+
+        movies.push({
+        title:newTitle,
+        year:newYear,
+        rating: 4});
+        res.status(200).send(movies);
+      
+    }else{
+
+      movies.push({
+        title:newTitle,
+        year:newYear,
+        rating: newRating});
+        res.status(200).send(movies);
+      }
+    });
+
   const movies = [
     { title: 'Jaws', year: 1975, rating: 8 },
     { title: 'Avatar', year: 2009, rating: 7.8 },
