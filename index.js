@@ -98,6 +98,18 @@ app.get('/movie/read/:action', (req, res) => {
     }
   });
 
+
+  app.get('/movies/:id', (req, res) => {
+    let id = (req.params.id) - 1;
+    if (!movies[id]) {
+      res.status(404).send({
+        error: true,
+        message: "the movie " + (id + 1) + ' does not exist '
+      });
+    } else {
+      res.status(200).send(movies[id]);
+    }
+  });
   const movies = [
     { title: 'Jaws', year: 1975, rating: 8 },
     { title: 'Avatar', year: 2009, rating: 7.8 },
