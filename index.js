@@ -142,7 +142,21 @@ app.get('/movie/read/:action', (req, res) => {
       }
     });
 
-
+    app.delete('/movies/:id', (req, res) => {
+        let id = (req.params.id) - 1;
+        const allMovies = {
+          data: movies
+        };
+        if (!movies[id]) {
+          res.status(404).send({
+            error: true,
+            message: "the movie " + (id + 1) + ' does not exist '
+          });
+        } else {
+          movies.splice(id, 1);
+          res.status(200).send(allMovies);
+        }
+      });
 
   const movies = [
     { title: 'Jaws', year: 1975, rating: 8 },
