@@ -68,8 +68,7 @@ app.get('/', (req, res) => {
 
 
   app.get('/movies/read', (req, res) => {
-    if (req.query.s == ) {
-        res.status(500).send('you have to provide a search');
+   
     
 });
 
@@ -77,7 +76,27 @@ app.get('/movies/delete', (req, res) => {
 
     res.send('delete');
 });
+app.get('/movie/read/:action', (req, res) => {
 
+    if (req.params.action == "by-date") {
+      const sortByDate = movies.sort((a, b) => (a.year > b.year) ? 1 : -1)
+      res.status(200).send({
+        data: sortByDate
+      });
+    } else if (req.params.action == "by-rating") {
+      const sortByRating = movies.sort((a, b) => (a.rating > b.rating) ? 1 : -1);
+      res.status(200).send({
+        data: sortByRating
+      });
+    } else if (req.params.action == "by-title") {
+      const sortByTitle = movies.sort((a, b) => (a.rating > b.rating) ? 1 : -1);
+      res.status(200).send({
+        data: sortByTitle
+      });
+    } else {
+      res.status(200).send("error");
+    }
+  });
 
   const movies = [
     { title: 'Jaws', year: 1975, rating: 8 },
