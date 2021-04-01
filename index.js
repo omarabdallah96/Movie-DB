@@ -54,4 +54,35 @@ app.get('/', (req, res) => {
       res.status(200).send('ok ' + req.query.s)
     }
   });
+   
+
+  app.get('/movies/create', (req, res) => {
+    res.send('create');
+
+  });
+
+  app.get('/movies/update', (req, res) => {
+
+    res.send('update');
+  });
+
+
+  app.get('/movies/read', (req, res) => {
+    if (req.query.s == ) {
+        res.status(500).send('you have to provide a search');
+    
+});
+
+app.get('/movies/delete', (req, res) => {
+
+    res.send('delete');
+});
+
+
+  const movies = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
 app.listen(port, () => console.log(`Success! Your application is running on \"http://localhost:${port}\"`));
