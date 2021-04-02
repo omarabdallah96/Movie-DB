@@ -191,7 +191,30 @@ app.get('/movie/read/:action', (req, res) => {
         }
       });
   
-  
+  //creat db
+const bodyParser= require('body-parser');
+const MongoClient = require('mongodb').MongoClient
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+  res.sendFile('C:/Users/coyboy/repos/MovieDB/MovieDB/index.html')
+  // Note: __dirname is the current directory you're in. Try logging it and see what you get!
+  // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
+})
+app.post('/info', (req, res) => {
+ 
+  console.log(req.body);
+});
+
+// USER
+MongoClient.connect(/* ... */)
+  .then(client => {
+
+    const db = client.db('star-wars-quotes')
+    const quotesCollection = db.collection('info')
+
+   
+  })
   const movies = [
     { title: 'Jaws', year: 1975, rating: 8 },
     { title: 'Avatar', year: 2009, rating: 7.8 },
